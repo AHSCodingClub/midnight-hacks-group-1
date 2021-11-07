@@ -1,1 +1,2 @@
-# midnight-hacks-group-1
+# A Jungle Adventure
+## Midnight Hacks - Group 1
