@@ -1,0 +1,477 @@
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <cctype>
+#include <fstream>
+
+
+using namespace std;
+
+const string artDoor = "   ┌─────┐\n   |     |\n   |    x|\n   |     |\n───└─────┘───";
+const string artClock = "  _______\n /  12   \\\n|    |    |\n|9   |/  3|\n|    *    |\n|         |\n \\___6___/";
+const string artWall = "┌────────────────────────────┐\n|            🕐              |\n|     🖼️                     |\n|            ____            |\n|           |    |           |\n└───────────└────┘───────────┘";
+const string artFloor = "______________________________________\n___________|_____________|_____________|\n______|____________|____________|_______\n___________|_____________|_____________|\n______|____________|____________|_______\n________|________----------__|_____________|\n______|____________|____________|_______\n___________|_____________|_____________|\n______|____________|____________|_______";
+const string artDresser = " _______\n|_o_|_o_|\n|___o___|\n|___o___|\n|___o___|\n||   ||";
+const string artOldRoomFloor = "┌─────────────────────────────────────────────────┐\n|     ________        _______________             |\n|    |__|__|__|      | | #####  | ####            |\n|    |__|__|__|      | |_#####  |_#####___        |    \n|    |__|__|__|      | _  ___     ___    |_       |\n|                    | _|/   \\___/   \\____|       |\n|                        \\___/   \\___/            |\n|                                                 |\n|                                                 |\n|    ┌───────────┐                                |\n|    | _ | _ | _ |                                |\n|    | _ | _ | _ |                                |\n|    | _ | _ | _ |                                |\n|    └───────────┘                                |\n|    ┌───────────┐                                |\n|    | _ | _ | X |                                |\n|    | O | _ | _ |                                |\n|    | _ | _ | _ |                                |\n|    └───────────┘                                |\n└─────────────────────────────────────────────────┘";
+const string artThreeDoors = "   ┌─────┐   ┌─────┐   ┌─────┐  \n   |  1  |   |  2  |   |  3  |\n   |    x|   |    x|   |    x|\n   |     |   |     |   |     |\n───└─────┘───└─────┘───└─────┘───";
+
+const string artPainting = "╬════════════════╬\n║──────────░░░░░░║\n║──────────░░░░░░║\n║─▐▀▀█─────░░░░░░║\n║─▐▄─▄▌──▄─▄─────║\n║──▐▐────│─┼─────║\n║████████████████║\n╬════════════════╬";
+const string artPaintingCompleted = "╬════════════════╬\n║──────────X░X░X░║\n║──────────X░░░X░║\n║─▐▀▀█─────X░X░X░║\n║─▐▄─▄▌──▄─▄─────║\n║──▐▐────│─┼─────║\n║████████████████║\n╬════════════════╬";
+
+string sisterName;
+
+string promptUser(string prompt) {
+  string userInput;
+
+  cout << prompt + "\n> ";
+  cin >> userInput;
+
+  return userInput;
+}
+
+void clearScreen() {
+  cout << "\x1B[2J\x1B[H";
+}
+
+void enterToContinue(string s) {
+  cout << s;
+  cin.ignore();
+  clearScreen();
+}
+
+void enterToContinue(string s, bool clear) {
+  cout << s;
+  cin.ignore();
+
+  if (clear) {
+    clearScreen();
+  }
+}
+
+void introduction() {
+  string name = promptUser("What's your name?");
+  cout << "\n";
+  string sisterName = promptUser("Enter a tragic sister name.");
+  cout << "Welcome, " << name << ".";
+
+  cout << "Press ENTER to continue on all pages, unless otherwise specified";
+
+  enterToContinue("You wake up..");
+  enterToContinue("You're lying down.");
+  enterToContinue("You must be.. lying down in your cozy bed.. yes, you're in your room and.. stomping?");
+  enterToContinue("It's your sister!");
+  enterToContinue("It's " + sisterName + ", yes! And she's brought breakfast! The most beautiful breakfast you've ever seen!");
+  enterToContinue("You can almost taste it");
+  enterToContinue("It smells like, it smells like... what does it smell like?");
+  enterToContinue("Oh well...");
+  enterToContinue("It's a beautiful day, and you feel the sun beaming down on your skin");
+  enterToContinue("But what does it feel like?");
+  enterToContinue("But you feel so alive, with the feeling of blood coarsing through your veins");
+  enterToContinue("Yes! And your sister, " + sisterName + ", is here with you. Just like the good old times!");
+  enterToContinue("...");
+  enterToContinue("*sobbing*");
+  enterToContinue("...");
+  enterToContinue("--Good old times?");
+  enterToContinue("What good old times?");
+  enterToContinue("New times are good too! All times are great, including this one!");
+  enterToContinue("Indeed, this is the best time ever, right now.");
+  enterToContinue("Right here, in my bed, in my cozy bed, with " + sisterName + " right here..");
+  enterToContinue("--Wait--");
+  enterToContinue("Where is she?");
+
+  enterToContinue("Surely--");
+  enterToContinue("Surely--");
+  enterToContinue("Surely!--");
+  enterToContinue("She's fine,");
+  enterToContinue("Surely, she's fine, right?");
+  enterToContinue("She's probably downstairs, that's all.");
+  enterToContinue("Breakfast is taking a little longer than expected, that's all.");
+  enterToContinue("THAT.");
+  enterToContinue("IS.");
+  enterToContinue("ALL.");
+  enterToContinue("...");
+  enterToContinue("...");
+  enterToContinue("Lets get out of this room");
+
+  // enterToContinue("-- STOP. STOP! Don't do this to yourself again. You know where you really are. Just accept it.");
+
+  // Play a game with sister   
+  //  enterToContinue("You begin running away and you suddenly find yourself in a jungle. Now you're lost and you need to find a way to escape.");
+}
+
+void renderArt(int artName) {
+  switch (artName) {
+    // Display the door
+  case 0:
+    cout << artDoor;
+    break;
+
+    // Display the clock
+  case 1:
+    cout << artClock;
+    break;
+
+    // Display the wall item
+  case 2:
+    cout << artWall;
+    break;
+
+    // Display the floor
+  case 3:
+    cout << artFloor;
+    break;
+
+    // Display the dresser      
+  case 4:
+    cout << artDresser;
+    break;
+
+    // Display the old room's floor
+  case 5:
+    cout << artOldRoomFloor;
+    break;
+
+    // Display the three doors
+  case 6:
+    cout << artThreeDoors;
+    break;
+  case 7:
+    cout << artPainting;
+    break;
+  default:
+    break;
+  }
+
+  cout << "\n";
+}
+
+void escapeRoom() {
+  bool tool = false;
+  bool key = false;
+  bool escape = false; // Turns true once they've inspected the clock and the floor
+
+  string userInput;
+  renderArt(0);
+
+  do {
+    userInput = promptUser("Do you want to accept the escape room challenge? (y/n)");
+  }
+  while (userInput != "y" && userInput != "n");
+
+  if (userInput == "y") {
+    clearScreen();
+    int count = 0; // Once count reaches the total number of items, inspection is over
+
+    enterToContinue("Find a way out by inspecting items.");
+
+    while (escape != true) {
+      // Display wall
+      renderArt(2);
+
+      do {
+        userInput = promptUser("Which item do you want to inspect? Enter a number. \n\t1. Clock\n\t2. Floor\n\t3. Door\n\t4. Dresser\n\t5. Painting");
+      } while (userInput != "1" && userInput != "2" && userInput != "3" && userInput != "4" && userInput != "5");
+
+      if (userInput == "1") {
+        renderArt(1);
+        cout << "\nThe time is frozen at 1 o'clock.\n";
+      } else if (userInput == "2") {
+        renderArt(3);
+        cout << "\nIt looks like there's a loose floorboard. You need a tool to look underneath.\n";
+        enterToContinue("", false);
+
+        if (tool == true) {
+          do {
+            userInput = promptUser("Inspect under the floor? (y/n)");
+          }
+          while (userInput != "y" && userInput != "n");
+
+          if (userInput == "y") {
+            // Display empty spot in floor with key
+            enterToContinue("You found a key!");
+            key = true;
+          } else {
+            cout << "Ok";
+          }
+        }
+      } else if (userInput == "3") {
+        renderArt(0);
+
+        if (key == true && tool == true) {
+          escape = true;
+        } else {
+          enterToContinue("You need a passcode and a key to open the door and escape.");
+        }
+
+        if (escape) {
+          enterToContinue("You escaped!");
+          enterToContinue("You look behind you into the room.");
+          enterToContinue("It looks oddly familiar...");
+          enterToContinue("You realise that this used to be your sister's room, but now-");
+          enterToContinue(" it's empty.");
+        } else {
+          enterToContinue("You can't escape yet.");
+        }
+      } else if (userInput == "4") {
+        renderArt(4);
+
+        if (!tool) {
+          tool = true;
+          enterToContinue("You open a drawer in the dresser, and you find a tool!");
+        } else {
+          enterToContinue("You open the drawer in the dresser, and you don't find anything...BECAUSE YOU ALREADY FOUND THE TOOL!");
+        }
+      } else if (userInput == "5") {
+        renderArt(4);
+
+        enterToContinue("You look at the painting on the wall");
+        enterToContinue("Was that-");
+        enterToContinue("You're sister's painting?");
+        enterToContinue("Why is it incomplete?");
+
+        do {
+          userInput = promptUser("Would you like to start the painting riddle? (y/n)");
+        } while (userInput != "y" && userInput != "n");
+        if (userInput == "y"){
+          //show painting
+					renderArt(7);
+          do {
+            userInput = promptUser("There is one thing that goes around the house and also inside the house but it never touches anything. What is it?");
+						for (char &c : userInput) c = tolower(c);
+          }
+          while (userInput != "sun");
+          
+          if (userInput == "sun") {
+            enterToContinue("Oh right-");
+            enterToContinue("We were supposed to complete it together..");
+            
+            cout << "Complete the painting through a solo game of tic tac toe...";
+            // make directions for how to comnplete the painting
+          }
+          else {
+            userInput =promptUser("Do you want to try again? (y/n)");
+            
+          }
+        }
+      }
+    }
+  } else {
+    cout << "...great job.\n";
+    return;
+  }
+}
+// 
+bool ticTacToe() {
+  string b[9][2];
+  bool bc[9];
+	
+  const string x0 = " \\/ ";
+  const string x1 = " /\\ ";
+  const string o0 = " _  ";
+  const string o1 = "|_| ";
+  const string blank = "    ";
+	
+  for (int i = 0; i < 9; i++) {
+    for (int j = 0; j < 2; j++) b[i][j] = blank;
+		bc[i] = false;
+  }
+
+  for (int i = 0; i < 9; i++) {
+    string ans;
+    do {
+      if (i % 2 == 0) {
+        ans = promptUser("\n\n" + sisterName + "'s move (1-9): ");
+      } else {
+        ans = promptUser("\n\nYour move (1-9): ");
+      }
+
+    } while (ans.length() <= 1 &&
+      ans[0] != '1' &&
+      ans[0] != '2' &&
+      ans[0] != '3' &&
+      ans[0] != '4' &&
+      ans[0] != '5' &&
+      ans[0] != '6' &&
+      ans[0] != '7' &&
+      ans[0] != '8' &&
+      ans[0] != '9' &&
+			bc[int(ans[0] - '1')] == true
+    );
+
+    int num = ans[0] - '1';
+    if (i % 2 == 0) {
+      b[num][0] = x0;
+      b[num][1] = x1;
+    } else {
+      b[num][0] = o0;
+      b[num][1] = o1;
+    }
+
+		bc[num] = true;
+
+    clearScreen();
+
+    cout <<
+        " __________________________\n"
+        "|1 " + b[0][0] + "  |2 " + b[1][0] + "  |3 " + b[2][0] + "  |\n"
+        "|  " + b[0][1] + "  |  " + b[1][1] + "  |  " + b[2][1] + "  |\n"
+        "|________|________|________|\n"
+        "|4 " + b[3][0] + "  |5 " + b[4][0] + "  |6 " + b[5][0] + "  |\n"
+        "|  " + b[3][1] + "  |  " + b[4][1] + "  |  " + b[5][1] + "  |\n"
+        "|________|________|________|\n"
+        "|7 " + b[6][0] + "  |8 " + b[7][0] + "  |9 " + b[8][0] + "  |\n"
+        "|  " + b[6][1] + "  |  " + b[7][1] + "  |  " + b[8][1] + "  |\n"
+        "|________|________|________|";
+  }
+	return true;
+}
+// after you finish the tic tac toe (painting) post the illustration of the finished painting with the sun, and then after that create context that leads to the user going through the 3 doors. with each door going to a certain clock leaving it in a loop until you get into the right door where the clocks are correct
+bool isInt(string s) {
+	bool ret = true;
+	for (char c : s) {
+		if (c != '1' &&
+      c != '2' &&
+      c != '3' &&
+      c != '4' &&
+      c != '5' &&
+      c != '6' &&
+      c != '7' &&
+      c != '8' &&
+      c != '9') ret = false;
+	}
+	return ret;
+}
+
+void threeDoors() {
+	int seg = 0;
+	string ans;
+	while(ans != "B" || seg != 0) {
+		string one = to_string(seg * 3 + 1);
+		string two = to_string(seg * 3 + 2);
+		string three = to_string(seg * 3 + 3);
+		cout << 
+		"			 ┌─────┐   ┌─────┐   ┌─────┐\n"  
+		"			 |  " + one + "  |   |  " + two + "  |   |  " + three + "  |\n"
+		"<--B  |    x|   |    x|   |    x|  N-->\n"
+		" 		 |     |   |     |   |     |\n"
+		"──────└─────┘───└─────┘───└─────┘──────";
+		cin >> ans;
+		if (tolower(ans[0]) == 'n') seg++;
+		else if (tolower(ans[0]) == 'b') seg--;
+		else if (isInt(ans)) {
+			int ansI = 0;
+			for (char c : ans) {
+				ansI *= 10;
+				ansI += c - '0';
+			}
+			if (ansI < seg * 3 + 1 && ansI > seg * 3 + 3) enterToContinue("Hmm.. where is that room?");
+			else {
+				enterToContinue("Room " + ans + " is empty. " + sisterName + " must be in the next room. She has to be.");
+			} 
+		}
+	}
+}
+
+int main() {
+  // introduction();
+  escapeRoom();
+  // ticTacToe();
+  // threeDoors();
+
+  return 0;
+
+  // create a funeral scene and picture with (Best) Clock in the picture of the funeral after you complete the 3 doors
+
+}
+
+/*
+What if: 
+- Trapped in a jungle, complete adventure to get out
+- Riddles (with graphics and simple animations)
+- Escape room
+- Drone 0679:
+- You wake up on a hard, cold, floor. Your muscles are sore and can't feel anything from the neck up. Somehow, your eyes blink open. 
+- IMAGE OF ROBOT
+
+Hello. I am 0670. Please accept my challenge.
+- Accept / Decline.
+
+Great
+
+Setup:
+- start with an animation
+Hey.. there isn't any time for that right now..
+
+Drone 0679 - 
+
+Graphics/Animations:
+- Introduction
+    - Trees?
+    - Blurred trees? (to symbolize running)
+
+Games:
+- [x] Tic-Tac-Toe
+- [ ] 3 doors
+- 
+
+Stoescape roomry:
+  Why did the sister die
+  - Character finds out after challenges and is able to move on from death
+Escape room:
+use key and code to escape
+- Clock
+  - time of death
+  - 1 = code for door to escape
+- Floor
+  - loose floorboard
+  - need a tool to look under floor
+  - if you have the tool, discover key to door
+- Drawers
+  - look in the drawers to get tool
+- Painting
+  - Was created by sister (character reflects and is helped with moving on)
+
+---
+introduction():
+    enterToContinue("You wake up..");
+		enterToContinue("You're lying down.");
+		enterToContinue("You must be.. lying down in your cozy bed.. yes, you're in your room and.. that stomping?");
+    enterToContinue("It's your sister!");
+		enterToContinue("It's " + sisterName + ", yes! She's bringing breakfast! The most beautiful breakfast you've ever seen!");
+		enterToContinue("You can almost see it..");
+		enterToContinue("It smells like... the most wonderful thing you've ever smelled!");
+		enterToContinue("You can almost smell it, wafting up through the stairs..");
+		enterToContinue("It's the most wonderful morning you've ever lived!");
+		enterToContinue("You can almost feel it..");
+		enterToContinue("You're almost alive.");
+		enterToContinue("Yes! And " + sisterName + " is here with you. Just like the good old times!");
+		enterToContinue("...");
+		enterToContinue("*sobbing*");
+		enterToContinue("...");
+		enterToContinue("--Good old times?");
+		enterToContinue("What good old times?");
+		enterToContinue("New times are good too! All times are great, including this one!");
+		enterToContinue("Indeed, this is the best time ever, right now.");
+		enterToContinue("Right here, in my bed, in my cozy bed, with " + sisterName + "right here..");
+		enterToContinue("--Wait--");
+		enterToContinue("Where is she?");
+		enterToContinue("Surely--");
+		enterToContinue("Surely--");
+		enterToContinue("Surely!--");
+		enterToContinue("She's fine,");
+		enterToContinue("Surely, she's fine, right?");
+		enterToContinue("She's fine!");
+		enterToContinue("SHE'S FINE GODDAMIT");
+		enterToContinue("SHE'S THE MOST FINE I'VE EVER FUCKING SEEN");
+		enterToContinue("She's fine.");;
+		enterToContinue("She's still downstairs, that's all.");
+		enterToContinue("Breakfast is taking a little longer than expected, that's all.");
+		enterToContinue("It's those new eggs, that's all");
+		enterToContinue("That's all it is, silly me! It's those new eggs. Yes, those new eggs take longer to cook. I'll never buy them again. I'll make sure of it.");
+		enterToContinue("I'm in my room, and I'm waiting for her to finish cooking breakfast, that's all. THAT. IS. ALL.");
+
+		enterToContinue("Surely, surely, surely..");
+		enterToContinue("Oh, you went downstairs to take out the trash! come on, just come back for a second, " + sisterName + ".");
+		enterToContinue("Come back for a second please. I know breakfast is taking a little longer to make than expected! It's those ");
+*/
+// tic tac toe, 3 doors, and d 
